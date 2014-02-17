@@ -65,4 +65,23 @@ Widget providing CKEditor for Rich Text Editing.
             'options': json_encode(self.options)})
         )
 
+class MiniCKEditorWidget(CKEditorWidgetor):
+    """
+    Widget providing CKEditor for mini Text Editing.
+    """
+    def render(self, name, value, attrs={}):
+        if value is None:
+            value = ''
+
+        final_attrs = self.build_attrs(attrs, name=name)
+
+        self.options['filebrowserBrowseUrl'] = reverse('cked_elfinder')
+
+        return mark_safe(render_to_string('cked/ckeditor_mini.html', {
+            'final_attrs': flatatt(final_attrs),
+            'value': conditional_escape(force_unicode(value)),
+            'id': final_attrs['id'],
+            'options': json_encode(self.options)})
+        )
+
 
