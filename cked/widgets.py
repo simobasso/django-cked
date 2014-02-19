@@ -69,6 +69,28 @@ class MiniCKEditorWidget(CKEditorWidget):
     """
     Widget providing CKEditor for mini Text Editing.
     """
+    def __init__(self, *args, **kwargs):
+        config_name = kwargs.pop('config_name', 'mini')
+        super(MiniCKEditorWidget, self).__init__(*args, **kwargs)
+        # Use default config
+        self.options = default_settings.CKEDITOR_MINI_OPTIONS.copy()
+
+        # If CKEDITOR_OPTIONS presented in settings, use it!
+        general_options = getattr(settings, 'CKEDITOR_OPTIONS', None)
+
+        if general_options and config_name in general_options:
+            options = general_options[config_name]
+        else:
+            options = None
+
+        if options is not None:
+            if isinstance(options, dict):
+                # Override defaults with CKEDITOR_OPTIONS.
+                self.options.update(options)
+            else:
+                raise ImproperlyConfigured('CKEDITOR_OPTIONS setting must be'
+                                           ' a dictionary type.')
+
     def render(self, name, value, attrs={}):
         if value is None:
             value = ''
@@ -83,5 +105,3 @@ class MiniCKEditorWidget(CKEditorWidget):
             'id': final_attrs['id'],
             'options': json_encode(self.options)})
         )
-
-
