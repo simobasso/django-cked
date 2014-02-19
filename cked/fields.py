@@ -1,7 +1,7 @@
 from django.db import models
 from django import forms
 
-from cked.widgets import CKEditorWidget, miniCKEditorWidget
+from cked.widgets import CKEditorWidget, MiniCKEditorWidget
 
 
 class RichTextField(models.TextField):

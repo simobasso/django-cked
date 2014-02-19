@@ -37,7 +37,7 @@ Widget providing CKEditor for Rich Text Editing.
         # If CKEDITOR_OPTIONS presented in settings, use it!
         general_options = getattr(settings, 'CKEDITOR_OPTIONS', None)
 
-        if config_name in general_options:
+        if general_options and config_name in general_options:
             options = general_options[config_name]
         else:
             options = None
@@ -65,7 +65,7 @@ Widget providing CKEditor for Rich Text Editing.
             'options': json_encode(self.options)})
         )
 
-class MiniCKEditorWidget(CKEditorWidgetor):
+class MiniCKEditorWidget(CKEditorWidget):
     """
     Widget providing CKEditor for mini Text Editing.
     """
