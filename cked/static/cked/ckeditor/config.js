@@ -11,4 +11,8 @@ CKEDITOR.editorConfig = function( config ) {
     config.extraPlugins = 'vimeo,images,onchange';
     config.removePlugins = 'iframe,image';
     config.forceSimpleAmpersand = true;
+
+    config.toolbar_Mini = [
+        [ 'Source', '-', 'Bold', 'Italic', 'Underline' ]
+    ];
 };

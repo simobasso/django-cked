@@ -10,7 +10,7 @@ CKEDITOR_DEFAULT_OPTIONS = {
 
 CKEDITOR_MINI_OPTIONS = {
     'skin': 'moono',
-    'toolbar': 'Full',
+    'toolbar': 'Mini',
     'filebrowserWindowWidth': 940,
     'filebrowserWindowHeight': 450,
 }
