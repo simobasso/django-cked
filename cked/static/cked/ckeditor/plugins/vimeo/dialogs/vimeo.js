@@ -21,7 +21,7 @@ CKEDITOR.dialog.add( 'vimeoDialog', function ( editor ) {
                         label: 'Carica un video',
                         title: 'Carica',
                         onClick: function() {
-                            var NWin = window.open('/vimeo/importvideo/', '', 'height=800,width=800');
+                            var NWin = window.open('/mediamanager/importvideo/', '', 'height=800,width=800');
                             if (window.focus)
                             {
                               NWin.focus();
@@ -133,7 +133,7 @@ CKEDITOR.dialog.add( 'vimeoDialog', function ( editor ) {
             var jQuery = django.jQuery, $ = jQuery;
             $( "#myVideoDiv" ).empty();
             $.ajax({
-                url : '/vimeo/myvideocall/',
+                url : '/mediamanager/myvideocall/',
                 dataType : 'json',
                 type : 'GET',
                 success: function(data) {
