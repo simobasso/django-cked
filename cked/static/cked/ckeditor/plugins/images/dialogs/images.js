@@ -21,7 +21,7 @@ CKEDITOR.dialog.add( 'imagesDialog', function ( editor ) {
                         label: 'Carica una Immagine',
                         title: 'Carica',
                         onClick: function() {
-                            var NWin = window.open('/vimeo/importimage/', '', 'height=800,width=800');
+                            var NWin = window.open('/mediamanager/importimage/', '', 'height=800,width=800');
                             if (window.focus)
                             {
                               NWin.focus();
@@ -75,7 +75,7 @@ CKEDITOR.dialog.add( 'imagesDialog', function ( editor ) {
             var jQuery = django.jQuery, $ = jQuery;
             $( "#myImagesDiv" ).empty();
             $.ajax({
-                url : '/vimeo/myimagecall/',
+                url : '/mediamanager/myimagecall/',
                 dataType : 'json',
                 type : 'GET',
                 success: function(data) {
