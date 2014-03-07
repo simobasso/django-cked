@@ -53,11 +53,11 @@ CKEDITOR.dialog.add( 'imagesDialog', function ( editor ) {
                                 labelLayout: 'vertical',
                                 validate: CKEDITOR.dialog.validate.notEmpty( "Errore: il campo non può essere vuoto" ),
                                 setup: function( element ) {
-                                    src = element.getAttribute( "src" ).replace("/static/", "")
+                                    src = element.getAttribute( "src" ).replace("/image/", "")
                                     this.setValue( src );
                                 },
                                 commit: function( element ) {
-                                    element.setAttribute( "src", "/static/" + this.getValue() );
+                                    element.setAttribute( "src", "/image/" + this.getValue() );
                                 }
                             }
                         ]
