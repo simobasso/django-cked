@@ -80,7 +80,7 @@ CKEDITOR.dialog.add( 'imagesDialog', function ( editor ) {
                 type : 'GET',
                 success: function(data) {
                     $.each(data, function(i, item) {
-                        $( "#myImagesDiv" ).append( '<a href="#" onclick=\'CKEDITOR.dialog.getCurrent().getContentElement("tab-my-img","src").setValue("' + data[i].fields.image.url + '"); CKEDITOR.dialog.getCurrent().getContentElement("tab-my-img","pk").setValue(' + data[i].pk + '); \'><div style="white-space: normal !important;width:135px;height:135px;display:inline-block;margin-right: 10px;" id="image_' + data[i].pk + '"><img src="/image/' + data[i].fields.image + '" style="width: 135px;"/><p>' + data[i].fields.title +' </p></div></a>' );
+                        $( "#myImagesDiv" ).append( '<a href="#" onclick=\'CKEDITOR.dialog.getCurrent().getContentElement("tab-my-img","src").setValue("' + data[i].fields.image + '"); CKEDITOR.dialog.getCurrent().getContentElement("tab-my-img","pk").setValue(' + data[i].pk + '); \'><div style="white-space: normal !important;width:135px;height:135px;display:inline-block;margin-right: 10px;" id="image_' + data[i].pk + '"><img src="/image/' + data[i].fields.image + '" style="width: 135px;"/><p>' + data[i].fields.title +' </p></div></a>' );
                     });
                 },
                 error:function (xhr, textStatus, thrownError){
