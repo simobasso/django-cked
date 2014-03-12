@@ -58,7 +58,7 @@ CKEDITOR.dialog.add( 'imagesDialog', function ( editor ) {
                                     a = src.split(".")
                                     e = a[1]
                                     b = a[0]
-                                    src = b.slice(0,b.length - format.length) + "." + e
+                                    src = b.slice(0,b.length - format.length - 1) + "." + e
                                     this.setValue( src );
                                 },
                             }
