@@ -49,20 +49,78 @@ CKEDITOR.dialog.add( 'imagesDialog', function ( editor ) {
                             {
                                 type: 'text',
                                 id: 'src',
+                                label: 'Immagine Originale',
+                                labelLayout: 'vertical',
+                                validate: CKEDITOR.dialog.validate.notEmpty( "Errore: il campo non può essere vuoto" ),
+                                setup: function( element ) {
+                                    enter = element.getAttribute( "src" ).replace("/files/", "")
+                                    format = element.getAttribute( "data-format" )
+                                    a = src.split(".")
+                                    e = a[1]
+                                    b = a[0]
+                                    src = b.slice(0,b.length - format.length) + "." + e
+                                    this.setValue( src );
+                                },
+                            }
+                        ]
+                    },
+                    {
+                        type: 'hbox',
+                        widths: [100, 200],
+                        children :
+                        [
+                            {
+                                 type: 'select',
+                                 id: 'format',
+                                 label: 'Formato',
+                                 validate: CKEDITOR.dialog.validate.notEmpty( "Errore" ),
+                                 items: [ ['Scegli un formato'], ],
+                                 'default': 'Scegli un formato',
+                                 setup: function( element ) {
+                                     format = element.getAttribute("data-format");
+                                     this.setValue(format);
+                                 },
+                                 commit: function( element ) {
+                                     element.setAttribute( "data-format", this.getValue() );
+                                 },
+                                 onChange: function(){
+                                    var jQuery = django.jQuery, $ = jQuery;
+                                    $.ajax({
+                                        url : '/mediamanager/addmedia/',
+                                        dataType : 'json',
+                                        type : 'POST',
+                                        param: {
+                                            type: 'image',
+                                            format: this.getValue(),
+                                            media_id: this.getContentElement("tab-my-img","pk").getValue(),
+                                            esercizio_id: window.esercizio_id
+                                            }
+                                        success: function(data) {
+                                            this.getContentElement("tab-my-img","srcdef").setValue(data)
+                                        },
+                                        error:function (xhr, textStatus, thrownError){
+                                            error(xhr, textStatus, thrownError);
+                                        }
+                                    });
+                                     
+                                 }
+                             },
+                            {
+                                type: 'text',
+                                id: 'srcdef',
                                 label: 'Immagine',
                                 labelLayout: 'vertical',
                                 validate: CKEDITOR.dialog.validate.notEmpty( "Errore: il campo non può essere vuoto" ),
                                 setup: function( element ) {
-                                    src = element.getAttribute( "src" ).replace("/image/", "")
+                                    src = element.getAttribute( "src" ).replace("/files/", "")
                                     this.setValue( src );
                                 },
                                 commit: function( element ) {
-                                    element.setAttribute( "src", "/image/" + this.getValue() );
+                                    element.setAttribute( "src", "/files/" + this.getValue() );
                                 }
                             }
                         ]
-                    },
-
+                    }
                 ]
 
             }
@@ -70,6 +128,8 @@ CKEDITOR.dialog.add( 'imagesDialog', function ( editor ) {
         onLoad: function() {
             this.getContentElement("tab-my-img","src").disable();
             this.getContentElement("tab-my-img","pk").disable();
+            this.getContentElement("tab-my-img","srcdef").disable();
+            this.getContentElement("tab-my-img","format").add(label);
         },
         onShow: function() {
             var jQuery = django.jQuery, $ = jQuery;
